@@ -198,7 +198,7 @@ get_tags(Name) ->
     folsom_ets:get_tags(Name).
 
 histogram_timed_update(Name, Fun) ->
-    {Time, Value} = timer:tc(Fun),
+    {Time, Value} = timer:tc(Fun, []),
     ok = notify({Name, Time}),
     Value.
 
@@ -221,7 +221,7 @@ histogram_timed_notify({Name, Begin}) ->
     ok = notify({Name, Time}).
 
 safely_histogram_timed_update(Name, Fun) ->
-    {Time, Value} = timer:tc(Fun),
+    {Time, Value} = timer:tc(Fun, []),
     _ = safely_notify({Name, Time}),
     Value.
 
